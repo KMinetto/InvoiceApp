@@ -12,6 +12,9 @@ module.exports = {
       green: "#33d69f",
       orange: "#ff8f00",
     },
+    maxWidth: {
+      700: "700px"
+    },
     minWidth: {
       large: "90px",
     },
@@ -24,6 +27,9 @@ module.exports = {
       },
       zIndex: {
         99: "99",
+      },
+      flexBasis: {
+        10: "10%",
       },
     },
   },
