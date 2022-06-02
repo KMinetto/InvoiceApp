@@ -5,8 +5,11 @@
       v-if="!mobile"
       class="app flex flex-col lg:flex-row bg-darkPurple min-h-screen"
     >
-      <Navigation></Navigation>
+      <Navigation />
       <div class="app-content relative flex flex-1">
+        <transition name="invoice">
+          <InvoiceModal v-if="invoiceModal" />
+        </transition>
         <router-view></router-view>
       </div>
     </div>
@@ -26,7 +29,9 @@
 
 <script>
 import "./assets/tailwind.css";
+import { mapState } from "vuex"
 import Navigation from "./components/Navigation";
+import InvoiceModal from "./components/InvoiceModal";
 
 export default {
   name: "App",
@@ -37,6 +42,7 @@ export default {
   },
   components: {
     Navigation,
+    InvoiceModal
   },
   created() {
     this.checkScreen();
@@ -52,6 +58,9 @@ export default {
       this.mobile = false;
     },
   },
+  computed: {
+    ...mapState(["invoiceModal"])
+  },
 };
 </script>
 
@@ -63,6 +72,17 @@ export default {
   .app-content {
     padding: 0 20px;
   }
+}
+
+// animated invoice
+.invoice-enter-active,
+.invoice-leave-active {
+  transition: 0.5s ease all;
+}
+
+.invoice-enter-from,
+.invoice-leave-to {
+  transform: translateX(-700px);
 }
 
 button,
